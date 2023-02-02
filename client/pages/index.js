@@ -6,7 +6,7 @@ const Page = () => (
   <div>
     Welcome, <Name />
     <br/><br/>
-    <Link href="/about"><a>About</a></Link>
+    <Link href="/about">About</Link>
 
   </div>
 )
