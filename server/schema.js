@@ -49,13 +49,6 @@ const UserType = new GraphQLObjectType({
   }
 });
 
-var array_of = function(times, generator) {
-    
-    for (var i = 0; i < times; ++i) {
-        result.push({generator});
-    }
-    return result;
-};
 module.exports = new GraphQLSchema({
   query: new GraphQLObjectType({
     name: 'RootQueryType',
