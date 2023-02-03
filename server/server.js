@@ -9,7 +9,7 @@ const app = express();
 // to access graphql API from the client side
 app.use(cors())
 // bodyParser is needed just for POST.
-app.use('/graphql', bodyParser.json(), graphqlExpress({ schema: myGraphQLSchema }));
+app.use('/graphql', bodyParser.json(), graphqlExpress({ schema:  myGraphQLSchema})); //myGraphQLSchema
 // for the graphiql interface
 app.get('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
 
