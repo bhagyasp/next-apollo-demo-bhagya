@@ -1,10 +1,11 @@
 import Link from 'next/link'
-//import WithApollo from '../lib/with-apollo'
-//import Name from '../components/Name'
+import NameComponent from '../components/Name'
+import ApolloConfig from '../lib/with-apollo'
+import { ApolloProvider } from '@apollo/client'
 
 const Page = () => (
   <div>
-    Welcome, 
+    Welcome, <ApolloProvider client={ApolloConfig}><NameComponent /></ApolloProvider>
     <br/><br/>
     <Link href="/about">About</Link>
     <br/><br/>
@@ -12,4 +13,4 @@ const Page = () => (
   </div>
 )
 
-export default Page
+export default Page;
