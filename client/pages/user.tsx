@@ -7,9 +7,12 @@ import { useState } from 'react'
 
 const User = () => {
     const [loadMore, setLoadMore] = useState(false);
-    
     const handleLoadMore = (value) => {
-       setLoadMore(value);
+        if(value === false){
+          setLoadMore(value);
+        } else {
+            setLoadMore(true);
+        }
     }
     
     return (
@@ -27,13 +30,14 @@ const User = () => {
                     width: "90vw",
                 }}
             >
-                <Link href="/"><Button variant="contained">Go Back</Button></Link>
+                <Link href="/" data-testID="goBack"><Button variant="contained">Go Back</Button></Link>
                 <Button
+                data-testID="loadMore-btn"
                 variant="contained"
                 onClick={handleLoadMore}
                 >Load More</Button>
             </Box>
-           <ApolloProvider client={ApolloConfig}><NameDetails handleLoadMore={handleLoadMore} ></NameDetails></ApolloProvider>
+           <ApolloProvider client={ApolloConfig}><NameDetails handleLoadMore={handleLoadMore} LoadMoreData={loadMore}></NameDetails></ApolloProvider>
         </Box>
     )
 }

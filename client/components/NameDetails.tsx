@@ -5,7 +5,7 @@ import CardContent from '@mui/material/CardContent';
 import { Box, Typography } from '@mui/material'
 import { useEffect, useState } from 'react';
 
-const NameDetails = ({handleLoadMore}) => {
+const NameDetails = ({handleLoadMore, LoadMoreData}) => {
     const limit = 20;
     const [offset, setOffset] = useState(0);
    const {loading, data, error, fetchMore} = useQuery(listQuery, {
@@ -16,15 +16,17 @@ const NameDetails = ({handleLoadMore}) => {
     });
     
     useEffect(() => {
-        setOffset(offset+limit)
-        fetchMore({
-            variables : {
-                limit,
-                offset
-            }
-        });
-        handleLoadMore(false);
-    }, [handleLoadMore])
+        if(LoadMoreData) {
+            setOffset(offset+limit);
+            fetchMore({
+                variables : {
+                    limit,
+                    offset
+                }
+            });
+            handleLoadMore(!LoadMoreData)
+        }
+    }, [handleLoadMore, LoadMoreData]);
 
     return (
     !loading? 
@@ -34,6 +36,7 @@ const NameDetails = ({handleLoadMore}) => {
                 flexWrap: "wrap",
                 width: "95vw",
             }}
+            data-testID = "nameDetails"
         >
             {data.list.map((listItem) => (
                 <Card  
@@ -43,6 +46,7 @@ const NameDetails = ({handleLoadMore}) => {
                     height:150, 
                     margin:2
                     }}
+                    data-testID="NameDetailsCard"
                 >
                     <CardContent key={listItem.name}>
                     <Typography gutterBottom variant="h5" component="div">
@@ -57,7 +61,7 @@ const NameDetails = ({handleLoadMore}) => {
                 </Card>
             ))
             }
-            </Box> :  !error?<Typography> loading</Typography>: <Typography> error</Typography>
+            </Box> :  !error?<Typography data-testID="loadingMsg"> loading</Typography>: <Typography data-testID="errorMsg"> error</Typography>
     )
 }
 
